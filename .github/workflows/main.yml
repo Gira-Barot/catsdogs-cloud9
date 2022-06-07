@@ -17,8 +17,10 @@ jobs:
 
     # sequence of tasks
     steps:
-      - uses: actions/checkout@v3
-      - name: Loggin into ECR
+    - name: Code checkup
+    uses: actions/checkout@v3
+    
+      - name: Logging into ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
         env: 
