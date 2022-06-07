@@ -1,4 +1,4 @@
-name: Deploy in ECR
+name: Deploy in the ECR
 
 on:
 
