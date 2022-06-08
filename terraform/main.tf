@@ -82,7 +82,11 @@ resource "aws_key_pair" "giraassignment" {
   public_key = file("giraassignment.pub")
 }
 
-resource "aws_ecr_repository" "assignment1" {
-  name                 = "assignment1"
-  image_tag_mutability = "MUTABLE"
+resource "aws_ecr_repository" "cats" {
+  name                 = "cats"
+  
+}
+resource "aws_ecr_repository" "dogs" {
+  name                 = "dogs"
+  
 }
