@@ -1,26 +1,15 @@
-name: Deploy in the ECR
-
+# This is a basic workflow of ECR
+name: Pushing image in ECR
 on:
-
   push:
     branches: [ master ]
-  # Allows you to run this workflow manually
-  workflow_dispatch:
-  
-# A workflow run
 jobs:
-  # This workflow contains a job
   build:
-    # Job will execute on
-    name: IMAGE
+    name: Build Image
     runs-on: ubuntu-latest
-
-    # sequence of tasks
     steps:
-    - name: Code checkup
-    uses: actions/checkout@v3
-    
-      - name: Logging into ECR
+      - uses: actions/checkout@v3
+      - name: Login to ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
         env: 
@@ -29,42 +18,30 @@ jobs:
           AWS_SESSION_TOKEN: ${{secrets.AWS_SESSION_TOKEN}}
           AWS_REGION: us-east-1
           
-      - name: Build and push cats image to Amazon ECR
+      - name: Build, Test, Tag and push image into amazon ECR
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
           ECR_REPOSITORY: assignment1
-          IMAGE_TAG: catsv0.1
+          IMAGE_TAG: cats_1
           
         run: |
           cd cats/
-          ls -ltra
-          # Build the docker image 
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          # Run the container to test
           docker run -d -p 8080:80 --name assignment1-cats $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          # list all the containers
           docker ps
-          echo " sleep 10 seconds for container to run"
-          sleep 10
-          # Push the docker image to ECR repository
+          sleep 12
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           
-      - name: Build and push dogs image to Amazon ECR
+      - name: Build, Test, Tag and push image into amazon ECR
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
           ECR_REPOSITORY: assignment1
-          IMAGE_TAG: dogsv0.1
+          IMAGE_TAG: dogs_1
           
         run: |
           cd dogs/
-          ls -ltra
-          # Build the docker image 
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          # Run the container to test
           docker run -d -p 8081:80 --name assignment1-dogs $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          # list all the containers
           docker ps
-          echo " sleep 10 seconds for container to run"
-          sleep 10
-          # Push the docker image to ECR repository
+          sleep 15
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG 
