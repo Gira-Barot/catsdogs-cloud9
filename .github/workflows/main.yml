@@ -18,7 +18,7 @@ jobs:
           AWS_SESSION_TOKEN: ${{secrets.AWS_SESSION_TOKEN}}
           AWS_REGION: us-east-1
           
-      - name: Build, Test, Tag and push image into amazon ECR
+      - name: Build, Test, Tag and push image into amazon ecr
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
           ECR_REPOSITORY: assignment1
@@ -32,7 +32,7 @@ jobs:
           sleep 12
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           
-      - name: Build, Test, Tag and push image into amazon ECR
+      - name: Build, Test, Tag and push image into amazon ecr
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
           ECR_REPOSITORY: assignment1
