@@ -22,7 +22,7 @@ jobs:
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
           ECR_REPOSITORY: assignment2
-          IMAGE_TAG: cats_assignment2
+          IMAGE_TAG: Cats_assignment2
           
         run: |
           cd cats/
@@ -36,7 +36,7 @@ jobs:
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
           ECR_REPOSITORY: assignment2
-          IMAGE_TAG: dogs_assignment2
+          IMAGE_TAG: Dogs_assignment2
           
         run: |
           cd dogs/
