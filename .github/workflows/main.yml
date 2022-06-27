@@ -21,8 +21,8 @@ jobs:
       - name: Build, Test, Tag and push image into amazon ecr
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
-          ECR_REPOSITORY: cats
-          IMAGE_TAG: cats_1
+          ECR_REPOSITORY: assignment2
+          IMAGE_TAG: cats_assignment2
           
         run: |
           cd cats/
@@ -35,8 +35,8 @@ jobs:
       - name: Build, Test, Tag and push image into amazon ecr
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
-          ECR_REPOSITORY: dogs
-          IMAGE_TAG: dogs_1
+          ECR_REPOSITORY: assignment2
+          IMAGE_TAG: dogs_assignment2
           
         run: |
           cd dogs/
